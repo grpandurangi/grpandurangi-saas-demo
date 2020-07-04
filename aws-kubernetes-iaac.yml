@@ -32,5 +32,5 @@ steps:
     provider: 'aws'
     command: 'destroy'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes'
-    environmentServiceNameAWS: 'aws-service-connection'
+    environmentServiceNameAWS: 'aws-tf-service-connection'
 
