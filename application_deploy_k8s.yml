@@ -23,12 +23,11 @@ stages:
     - task: Docker@2
       displayName: Build and push an image
       inputs:
-        command: 'buildAndPush'
-        containerRegistry: 'dockerhub-service-connection'
+        containerRegistry: 'dockerhub_service_connection'
         repository: 'grpandurangi/learnazuredevopsdocker'
-        dockerfile: '**/Dockerfile'
-        tags: |
-          $(tag)
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
 
 #Build Docker Image
 #Push Docker 
