@@ -29,6 +29,10 @@ provider "kubernetes" {
   version                = "~> 1.9"
 }
 
+locals {
+  cluster_name = "test-eks-${random_string.suffix.result}"
+}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
@@ -55,7 +59,7 @@ module "vpc" {
 
 module "my-eks-cluster" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = "grpandurangi-cluster"
+  cluster_name = local.cluster_name
   cluster_version = "1.16"
   subnets =  module.vpc.intra_subnets
 
