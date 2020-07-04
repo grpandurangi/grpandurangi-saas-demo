@@ -16,7 +16,7 @@ steps:
     provider: 'aws'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes'
-    backendServiceAWS: 'aws-service-connection'
+    backendServiceAWS: 'aws-tf-service-connection'
     backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
     backendAWSKey: 'grpandurangi'
   
@@ -25,7 +25,7 @@ steps:
     provider: 'aws'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes'
-    environmentServiceNameAWS: 'aws-service-connection'
+    environmentServiceNameAWS: 'aws-tf-service-connection'
 
 # - task: TerraformTaskV1@0
 #   inputs:
