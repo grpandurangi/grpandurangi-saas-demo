@@ -40,7 +40,7 @@ module "my-eks-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name = local.cluster_name
   cluster_version = "1.16"
-  subnets =  data.aws_subnet_ids.subnet.ids
+  subnets =  data.aws_subnet_ids.subnets.ids
 
   vpc_id = data.aws_vpc.vpc.id 
 
