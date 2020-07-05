@@ -24,7 +24,7 @@ steps:
   inputs:
     provider: 'aws'
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/vpc'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
     environmentServiceNameAWS: 'aws-tf-service-connection'
 
 # - task: TerraformTaskV1@0
