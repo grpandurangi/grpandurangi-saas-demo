@@ -19,8 +19,9 @@ data "aws_security_group" "default" {
 }
 
 module "vpc" {
-  source = "../../"
 
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "2.6.0"
   name = "complete-example"
 
   cidr = "20.10.0.0/16" # 10.0.0.0/8 is reserved for EC2-Classic
