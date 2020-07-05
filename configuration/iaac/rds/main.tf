@@ -1,3 +1,8 @@
+variable "vpc_id" {
+type = string
+default = "vpc-4ea9b52a"
+}
+
 terraform {
   backend "s3" {
     bucket = "mybucket" # Will be overridden from build
@@ -13,18 +18,36 @@ provider "aws" {
 ##############################################################
 # Data sources to get VPC, subnets and security group details
 ##############################################################
-data "aws_vpc" "default" {
-  default = true
+#data "aws_vpc" "default" {
+#  default = true
+#}
+
+#data "aws_subnet_ids" "all" {
+#  vpc_id = data.aws_vpc.default.id
+#}
+
+#data "aws_security_group" "default" {
+#  vpc_id = data.aws_vpc.default.id
+#  name   = "default"
+#}
+
+data "aws_vpc" "vpc" {
+  id = "${var.vpc_id}"
 }
 
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
+data "aws_subnet_ids" "database" {
+  vpc_id = "${var.vpc_id}"
+
+  tags = {
+    tier = "database"
+  }
 }
 
 data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
+  vpc_id = data.aws_vpc.vpc.id
   name   = "default"
 }
+
 
 #####
 # DB
