@@ -18,7 +18,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/rds'
     backendServiceAWS: 'aws-tf-service-connection'
     backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
-    backendAWSKey: 'grpandurangi'
+    backendAWSKey: 'grpandurangi-rds'
   
 - task: TerraformTaskV1@0
   inputs:
