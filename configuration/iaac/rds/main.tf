@@ -1,8 +1,3 @@
-variable "vpc_id" {
-type = string
-default = "vpc-4ea9b52a"
-}
-
 terraform {
   backend "s3" {
     bucket = "mybucket" # Will be overridden from build
