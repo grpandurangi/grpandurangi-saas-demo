@@ -5,8 +5,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo This pipeline is for VPC provisioning!
-  displayName: 'VPC provision'
+- script: echo This pipeline is for RDS provisioning!
+  displayName: 'RDS Provision'
 
 # Init backend
 # apply
@@ -15,7 +15,7 @@ steps:
   inputs:
     provider: 'aws'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/rds'
     backendServiceAWS: 'aws-tf-service-connection'
     backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
     backendAWSKey: 'grpandurangi'
@@ -24,12 +24,12 @@ steps:
   inputs:
     provider: 'aws'
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/rds'
     environmentServiceNameAWS: 'aws-tf-service-connection'
 
 # - task: TerraformTaskV1@0
 #   inputs:
 #     provider: 'aws'
 #     command: 'destroy'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/rds'
 #     environmentServiceNameAWS: 'aws-tf-service-connection'
