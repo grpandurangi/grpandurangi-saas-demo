@@ -30,7 +30,7 @@ data "aws_vpc" "vpc" {
   id = "${var.vpc_id}"
 }
 
-data "aws_subnet_ids" "database" {
+data "aws_subnet_ids" "all" {
   vpc_id = "${var.vpc_id}"
 
   tags = {
