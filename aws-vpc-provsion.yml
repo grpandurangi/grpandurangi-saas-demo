@@ -34,4 +34,8 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
     environmentServiceNameAWS: 'aws-tf-service-connection'
 
+- task: TerraformCLI@0
+  inputs:
+    command: 'validate'
+
 
