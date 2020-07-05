@@ -20,16 +20,18 @@ steps:
     backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
     backendAWSKey: 'grpandurangi'
   
-- task: TerraformTaskV1@0
-  inputs:
-    provider: 'aws'
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
-    environmentServiceNameAWS: 'aws-tf-service-connection'
-
 # - task: TerraformTaskV1@0
 #   inputs:
 #     provider: 'aws'
-#     command: 'destroy'
+#     command: 'apply'
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
 #     environmentServiceNameAWS: 'aws-tf-service-connection'
+
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'aws'
+    command: 'destroy'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
+    environmentServiceNameAWS: 'aws-tf-service-connection'
+
+
