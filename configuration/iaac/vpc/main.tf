@@ -44,9 +44,6 @@ module "vpc" {
   dhcp_options_domain_name         = "service.consul"
   dhcp_options_domain_name_servers = ["127.0.0.1", "10.10.0.2"]
 
-  create_flow_log_cloudwatch_iam_role  = true
-  flow_log_max_aggregation_interval    = 60
-
   tags = {
     Owner       = "user"
     Environment = "staging"
