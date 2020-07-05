@@ -25,7 +25,7 @@ steps:
 #     provider: 'aws'
 #     command: 'apply'
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
-#     environmentServiceNameAWS: 'aws-tf-service-connection'
+    environmentServiceNameAWS: 'aws-tf-service-connection'
 
 - task: TerraformTaskV1@0
   inputs:
@@ -33,5 +33,11 @@ steps:
     command: 'destroy'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
     environmentServiceNameAWS: 'aws-tf-service-connection'
+
+# - task: terraform-outputs@0
+#   inputs:
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/vpc'
+#     mapSensitiveOutputsAsSecrets: false
+#     variablePrefix: 'vpc'
 
 
