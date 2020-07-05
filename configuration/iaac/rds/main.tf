@@ -22,8 +22,7 @@ data "aws_security_group" "default" {
 # DB
 #####
 module "db" {
-  source = "../../"
-
+  source  = "terraform-aws-modules/rds/aws"
   identifier = "demodb"
 
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
