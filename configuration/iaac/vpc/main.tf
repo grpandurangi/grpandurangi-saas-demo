@@ -32,10 +32,14 @@ module "vpc" {
   public_subnets      = ["20.10.11.0/24", "20.10.12.0/24", "20.10.13.0/24"]
   database_subnets    = ["20.10.21.0/24", "20.10.22.0/24", "20.10.23.0/24"]
 
-  #create_database_subnet_group = true
+  create_database_subnet_group = false
  
   database_subnet_tags = {
     "tier" = "database"
+  }
+
+  private_subnet_tags = {
+    "tier" = "k8s_subnet"
   }
 
 
@@ -54,3 +58,26 @@ module "vpc" {
   }
 
 }
+
+# VPC
+output "vpc_id" {
+  description = "The ID of the VPC"
+  value       = module.vpc.vpc_id
+}
+
+# Subnets
+output "private_subnets" {
+  description = "List of IDs of private subnets"
+  value       = module.vpc.private_subnets
+}
+
+output "public_subnets" {
+  description = "List of IDs of public subnets"
+  value       = module.vpc.public_subnets
+}
+
+output "database_subnets" {
+  description = "List of IDs of database subnets"
+  value       = module.vpc.database_subnets
+}
+

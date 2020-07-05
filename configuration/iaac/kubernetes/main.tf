@@ -1,6 +1,14 @@
-# aws --version
-# aws eks --region us-east-1 update-kubeconfig --name my-eks-cluster
+data "aws_vpc" "vpc" {
+  id = "${var.vpc_id}"
+}
 
+data "aws_subnet_ids" "subnets" {
+  vpc_id = "${var.vpc_id}"
+
+  tags = {
+    tier = "k8s_subnet"
+  }
+}
 
 terraform {
   backend "s3" {
@@ -10,16 +18,6 @@ terraform {
   }
 }
 
-resource "aws_default_vpc" "default" {
-
-}
-
-data "aws_availability_zones" "available" {
-}
-
-data "aws_subnet_ids" "subnets" {
-  vpc_id = aws_default_vpc.default.id
-}
 
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
@@ -38,37 +36,13 @@ resource "random_string" "suffix" {
   special = false
 }
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "2.6.0"
-
-  name                 = "test-vpc"
-  cidr                 = "10.0.0.0/20"
-  azs                  = data.aws_availability_zones.available.names
-  private_subnets      = ["10.0.1.0/24", "10.0.2.0/24"]
-  public_subnets       = ["10.0.4.0/24", "10.0.5.0/24"]
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
-
-  public_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/elb"                      = "1"
-  }
-
-  private_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/internal-elb"             = "1"
-  }
-}
-
 module "my-eks-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name = local.cluster_name
   cluster_version = "1.16"
-  subnets =  module.vpc.private_subnets
+  subnets =  data.aws_subnet_ids.subnet.ids
 
-  vpc_id = module.vpc.vpc_id
+  vpc_id = data.aws_vpc.vpc.id 
 
   node_groups = [
     {
