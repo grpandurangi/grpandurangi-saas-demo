@@ -38,7 +38,7 @@ resource "random_string" "suffix" {
 
 module "my-eks-cluster" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name = local.cluster_name
+  cluster_name    = "aws-eks-cluster"
   cluster_version = "1.16"
   subnets =  data.aws_subnet_ids.subnets.ids
 
