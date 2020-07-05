@@ -1,5 +1,4 @@
-trigger:
-- master
+trigger: none
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,19 +19,19 @@ steps:
     backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
     backendAWSKey: 'grpandurangi-rds'
   
-# - task: TerraformTaskV1@0
-#   inputs:
-#     provider: 'aws'
-#     command: 'apply'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/rds'
-#     commandOptions: '-var "vpc_id=$(VPC_ID)"'
-#     environmentServiceNameAWS: 'aws-tf-service-connection'
-
 - task: TerraformTaskV1@0
   inputs:
     provider: 'aws'
-    command: 'destroy'
+    command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/rds'
     commandOptions: '-var "vpc_id=$(VPC_ID)"'
     environmentServiceNameAWS: 'aws-tf-service-connection'
+
+# - task: TerraformTaskV1@0
+#   inputs:
+#     provider: 'aws'
+#     command: 'destroy'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/rds'
+#     commandOptions: '-var "vpc_id=$(VPC_ID)"'
+#     environmentServiceNameAWS: 'aws-tf-service-connection'
     
