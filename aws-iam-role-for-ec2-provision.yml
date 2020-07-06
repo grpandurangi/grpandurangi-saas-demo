@@ -19,19 +19,19 @@ steps:
     backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
     backendAWSKey: 'grpandurangi-iam-role-ec2'
   
-# - task: TerraformTaskV1@0
-#   inputs:
-#     provider: 'aws'
-#     command: 'apply'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/iam-role-ec2'
-#     commandOptions: '-var "region=$(REGION)"'
-#     environmentServiceNameAWS: 'aws-tf-service-connection'
-
 - task: TerraformTaskV1@0
   inputs:
     provider: 'aws'
-    command: 'destroy'
+    command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/iam-role-ec2'
     commandOptions: '-var "region=$(REGION)"'
     environmentServiceNameAWS: 'aws-tf-service-connection'
+
+# - task: TerraformTaskV1@0
+#   inputs:
+#     provider: 'aws'
+#     command: 'destroy'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/iam-role-ec2'
+#     commandOptions: '-var "region=$(REGION)"'
+#     environmentServiceNameAWS: 'aws-tf-service-connection'
     
