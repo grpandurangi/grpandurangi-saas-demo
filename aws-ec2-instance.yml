@@ -4,8 +4,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo This pipeline is for IAM for EC2 provisioning!
-  displayName: 'IAM for EC2 Provision'
+- script: echo This pipeline is for EC2 provisioning!
+  displayName: 'EC2 Provision'
 
 # Init backend
 # apply
