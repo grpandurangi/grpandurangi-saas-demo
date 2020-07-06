@@ -93,11 +93,6 @@ module "security_group_within_vpc" {
 }
 
 
-resource "aws_eip" "this" {
-  vpc      = true
-  instance = module.ec2.id[0]
-}
-
 resource "aws_kms_key" "this" {
 }
 
