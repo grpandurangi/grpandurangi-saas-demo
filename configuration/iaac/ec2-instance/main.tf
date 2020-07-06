@@ -102,7 +102,7 @@ resource "aws_kms_key" "this" {
 }
 
 resource "aws_network_interface" "this" {
-  count = 1
+  instance_count = 1
 
   subnet_id = tolist(data.aws_subnet_ids.all.ids)[count.index]
 }
