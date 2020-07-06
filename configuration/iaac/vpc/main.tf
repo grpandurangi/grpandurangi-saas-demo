@@ -22,7 +22,7 @@ module "vpc" {
 
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
-  name = "complete-example"
+  name = "saas-demo-vpc"
 
   cidr = "20.10.0.0/16" # 10.0.0.0/8 is reserved for EC2-Classic
 
@@ -41,6 +41,7 @@ module "vpc" {
   public_subnet_tags = {
     "kubernetes.io/cluster/aws-eks-cluster" = "shared"
     "kubernetes.io/role/elb"                      = "1"
+    "tier" = "web"
   }
 
   private_subnet_tags = {
