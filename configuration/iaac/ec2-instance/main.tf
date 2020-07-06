@@ -110,9 +110,8 @@ resource "aws_network_interface" "this" {
 module "ec2" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
-  instance_count = 1
+  count = 1
 
-  name          = "public-instance"
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
   subnet_id     = tolist(data.aws_subnet_ids.all.ids)[0]
@@ -139,6 +138,7 @@ module "ec2" {
   ]
 
   tags = {
+    "Name"     = "${var.vpc_id}-instance"
     "Env"      = "Private"
     "Location" = "Secret"
   }
