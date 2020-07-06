@@ -24,7 +24,7 @@ steps:
 #     provider: 'aws'
 #     command: 'apply'
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance-private'
-#     commandOptions: '-var "vpc_id=$(VPC_ID)" -var "tier=$(TIER)"'
+#     commandOptions: '-var "vpc_id=$(VPC_ID)"'
 #     environmentServiceNameAWS: 'aws-tf-service-connection'
 
 - task: TerraformTaskV1@0
@@ -32,6 +32,6 @@ steps:
     provider: 'aws'
     command: 'destroy'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance-private'
-    commandOptions: '-var "vpc_id=$(VPC_ID)" -var "tier=$(TIER)"'
+    commandOptions: '-var "vpc_id=$(VPC_ID)"'
     environmentServiceNameAWS: 'aws-tf-service-connection'
     
