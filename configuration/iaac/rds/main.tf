@@ -43,6 +43,23 @@ data "aws_security_group" "default" {
   name   = "default"
 }
 
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3.0"
+
+  name        = "from_public_private_subnets"
+  description = "Security group for example usage with EC2 instance"
+  vpc_id      = "${var.vpc_id}"
+
+  ingress_cidr_blocks = ["20.10.1.0/24", "20.10.2.0/24", "20.10.3.0/24","20.10.1.0/24", "20.10.2.0/24", "20.10.3.0/24"]
+  ingress_with_source_security_group_id = [
+    {
+      rule                     = "mysql-tcp"
+      source_security_group_id = data.aws_security_group.default.id
+    },
+  ]
+  egress_rules        = ["all-all"]
+}
 
 #####
 # DB
