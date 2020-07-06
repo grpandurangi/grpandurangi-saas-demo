@@ -119,7 +119,7 @@ module "ec2" {
   subnet_id     = tolist(data.aws_subnet_ids.all.ids)[0]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
-  key_name = module.key_pair.key_name
+  key_name = module.key_pair.this_key_pair_key_name
   user_data_base64 = base64encode(local.user_data)
 
   root_block_device = [
