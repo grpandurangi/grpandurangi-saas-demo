@@ -5,7 +5,7 @@ pool:
 
 steps:
 - script: echo This pipeline is for EC2 provisioning!
-  displayName: 'EC2 Provision'
+  displayName: 'EC2 Provision Public'
 
 # Init backend
 # apply
@@ -14,16 +14,16 @@ steps:
   inputs:
     provider: 'aws'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance-public'
     backendServiceAWS: 'aws-tf-service-connection'
     backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
-    backendAWSKey: 'grpandurangi-ec2-instance'
+    backendAWSKey: 'grpandurangi-ec2-instance-public'
   
 - task: TerraformTaskV1@0
   inputs:
     provider: 'aws'
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance-public'
     commandOptions: '-var "vpc_id=$(VPC_ID)" -var "tier=$(TIER)"'
     environmentServiceNameAWS: 'aws-tf-service-connection'
 
@@ -31,7 +31,7 @@ steps:
 #   inputs:
 #     provider: 'aws'
 #     command: 'destroy'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance-public'
 #     commandOptions: '-var "vpc_id=$(VPC_ID)" -var "tier=$(TIER)"'
 #     environmentServiceNameAWS: 'aws-tf-service-connection'
     
