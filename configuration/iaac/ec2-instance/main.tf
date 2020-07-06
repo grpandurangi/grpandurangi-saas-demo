@@ -22,7 +22,7 @@ resource "random_pet" "this" {
 }
 
 module "key_pair" {
-  source = "../../"
+  source = "terraform-aws-modules/key-pair/aws"
 
   key_name   = random_pet.this.id
   public_key = "${file("publickey")}"
@@ -108,7 +108,7 @@ resource "aws_network_interface" "this" {
 }
 
 module "ec2" {
-  source = "../../"
+  source = "terraform-aws-modules/ec2-instance/aws"
 
   instance_count = 1
 
