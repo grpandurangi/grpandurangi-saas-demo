@@ -32,7 +32,7 @@ module "key_pair" {
 # Data sources to get VPC, subnet, security group and AMI details
 ##################################################################
 data "aws_vpc" "default" {
-  default = "${var.vpc_id}"
+  id = "${var.vpc_id}"
 }
 
 data "aws_subnet_ids" "all" {
