@@ -107,9 +107,10 @@ resource "aws_network_interface" "this" {
   subnet_id = tolist(data.aws_subnet_ids.all.ids)[count.index]
 }
 
+
 module "ec2" {
   source = "terraform-aws-modules/ec2-instance/aws"
-
+  ersion = "2.15.0"
   count = 1
 
   ami           = data.aws_ami.amazon_linux.id
