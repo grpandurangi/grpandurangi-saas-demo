@@ -1,0 +1,37 @@
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo This pipeline is for EC2 provisioning!
+  displayName: 'EC2 Provision'
+
+# Init backend
+# apply
+
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'aws'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance'
+    backendServiceAWS: 'aws-tf-service-connection'
+    backendAWSBucketName: 'grpandurangi-s3-backend-terraform'
+    backendAWSKey: 'grpandurangi-ec2-instance'
+  
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'aws'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance'
+    commandOptions: '-var "vpc_id=$(VPC_ID)" -var "tier=$(TIER)"'
+    environmentServiceNameAWS: 'aws-tf-service-connection'
+
+# - task: TerraformTaskV1@0
+#   inputs:
+#     provider: 'aws'
+#     command: 'destroy'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/ec2-instance'
+#     commandOptions: '-var "vpc_id=$(VPC_ID)" -var "tier=$(TIER)"'
+#     environmentServiceNameAWS: 'aws-tf-service-connection'
+    
