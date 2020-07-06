@@ -11,7 +11,7 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "ec2_s3_access_role" {
-  name               = "s3-role"
+  name               = "saas-am-role-for-ec2-for-s3"
   assume_role_policy = "${file("assumerolepolicy.json")}"
 }
 
