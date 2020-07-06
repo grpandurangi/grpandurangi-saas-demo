@@ -113,6 +113,7 @@ module "ec2" {
   version = "2.15.0"
   instance_count = 1
 
+  name          = "ec2-instance-${var.vpc_id}"
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
   subnet_id     = tolist(data.aws_subnet_ids.all.ids)[0]
