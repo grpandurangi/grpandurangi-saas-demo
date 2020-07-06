@@ -102,7 +102,7 @@ resource "aws_kms_key" "this" {
 }
 
 resource "aws_network_interface" "this" {
-  instance_count = 1
+  count = 1
 
   subnet_id = tolist(data.aws_subnet_ids.all.ids)[count.index]
 }
@@ -110,8 +110,8 @@ resource "aws_network_interface" "this" {
 
 module "ec2" {
   source = "terraform-aws-modules/ec2-instance/aws"
-  ersion = "2.15.0"
-  count = 1
+  version = "2.15.0"
+  instance_count = 1
 
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
