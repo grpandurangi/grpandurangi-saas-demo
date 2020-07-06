@@ -3,5 +3,5 @@ variable "vpc_id" {
  }
 
 variable "tier" {
-  type = "string
+  type = string
 }
