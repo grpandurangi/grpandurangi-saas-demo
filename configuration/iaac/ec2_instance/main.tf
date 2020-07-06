@@ -39,7 +39,7 @@ data "aws_subnet_ids" "all" {
   vpc_id = "${var.vpc_id}"
 
   tags = {
-    tier = "web"
+    tier = "${var.tier}"
   }
 }
 
@@ -78,6 +78,20 @@ module "security_group" {
   ingress_rules       = ["ssh-tcp", "all-icmp"]
   egress_rules        = ["all-all"]
 }
+
+module "security_group_within_vpc" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3.0"
+
+  name        = "ssh-from-vpc"
+  description = "Security group for example usage with EC2 instance"
+  vpc_id      = data.aws_vpc.default.id
+
+  ingress_cidr_blocks = ["20.10.0.0/16"]
+  ingress_rules       = ["ssh-tcp", "all-icmp"]
+  egress_rules        = ["all-all"]
+}
+
 
 resource "aws_eip" "this" {
   vpc      = true
